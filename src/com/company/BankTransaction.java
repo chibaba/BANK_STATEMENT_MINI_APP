@@ -1,6 +1,7 @@
 package com.company;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public class BankTransaction {
@@ -31,9 +32,10 @@ public class BankTransaction {
         return "BankTransaction{" +
                 "date=" + date +
                 ", amount=" + amount +
-                ", description='" + description + 'git add .
-        git commit =" +
+                ", description='" + description + '\" +
         '}';
+
+        
     }
 
     @Override
@@ -51,4 +53,12 @@ public class BankTransaction {
     public int hashCode() {
         return Objects.hash(date, amount, description);
     }
+}
+// PROCESSING THE LIST OF BANK TRANSACTION
+public static double calculateTotalAmount(final List<BankTransaction> bankTransactions) {
+    double total = 0d;
+    for (final BankTransaction bankTransaction : bankTransactions) {
+        total += bankTransactions.getAmount();
+    }
+    return total
 }
