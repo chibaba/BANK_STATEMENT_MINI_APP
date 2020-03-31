@@ -11,5 +11,7 @@ class BankTransactionIsInFebruaryAndExpensive implements BankTransactionFilter {
     }
 
     final List<BankTransaction> transactions
-            = bankStatementProcessor.findTransactions(new BankTransactionIsInFebruaryAndExpensive());
+            = bankStatementProcessor.findTransactions(bankTransaction ->
+            bankTransaction.getDate().getMonth() == Month.FEBRUARY
+              && bankTransaction.getAmount() >= 1_000);
 }
