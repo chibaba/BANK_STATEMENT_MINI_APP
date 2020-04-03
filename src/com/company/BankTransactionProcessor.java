@@ -11,4 +11,21 @@ public interface BankTransactionProcessor {
     double calculateAverageAmount();
     double calculateAverageAmountForCategory(Category category);
     List<BankTransaction> findTransactions(BankTransactionFilter bankTransactionFilter);
+
+    @FunctionalInterface
+    public interface BankTransactionSummarizer {
+        double summarize(double accumulator, BankTransaction bankTransaction);
+    }
+    @FunctionalInterface
+    public interface BankTransactionFilter {
+        boolean test(BankTransaction bankTransaction);
+    }
+
+    public double summarizeTransactions(final BankTransactionSummarizer bankTransactionSummarizer) {
+        double result = 0;
+        for(final BankTransaction bankTransaction : bankTransactions) {
+            result = bankTransactionSummarizer.summarize(result, bankTransaction);
+        }
+        return result;
+    }
 }
